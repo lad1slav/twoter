@@ -1,5 +1,7 @@
 package com.example.twoter.controller
 
+import com.example.twoter.model.Comment
+import com.example.twoter.model.CommentDTO
 import com.example.twoter.model.Post
 import com.example.twoter.model.PostDTO
 import com.example.twoter.model.User
@@ -39,5 +41,15 @@ class PostController {
     @GetMapping("/newsletter/{userId}")
     List<Post> getNewsletter(@PathVariable userId) {
         postService.getNewsletter userId
+    }
+
+    @PostMapping("/comment")
+    Comment saveComment(@RequestBody CommentDTO data) {
+        postService.createComment data.getData(), data.getPostId()
+    }
+
+    @GetMapping("/comment/{postId}")
+    List<Comment> getComment(@PathVariable String postId) {
+        postService.getPostComments postId
     }
 }
