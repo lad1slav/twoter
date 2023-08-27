@@ -20,6 +20,8 @@ class UserServiceSpec extends Specification {
     def "should return user by id"() {
         given:
         def id = "1"
+        User savedUser = new User(id: id)
+        userRepository.save(savedUser)
 
         when:
         def user = userService.getUserById(id)
