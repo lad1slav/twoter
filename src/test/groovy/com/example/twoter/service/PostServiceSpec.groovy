@@ -69,6 +69,21 @@ class PostServiceSpec extends Specification {
         deletedPost == null
     }
 
+    def "should edit post"() {
+        given:
+        def userId = "1"
+        def data = "testuser@example.com"
+        def newData = "somenewdata"
+        Post post = postService.saveNewPost(userId, data)
+
+        when:
+        Post editedPost = postService.editPost(post.id, newData)
+
+        then:
+        post.data == data
+        editedPost.data == newData
+    }
+
     def "should create a comment"() {
         given:
         def userId = "1"

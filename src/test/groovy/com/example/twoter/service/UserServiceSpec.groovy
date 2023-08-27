@@ -44,6 +44,22 @@ class UserServiceSpec extends Specification {
         deletedUser == null
     }
 
+    def "should edit user"() {
+        given:
+        def username = "testuser"
+        def newusername = "newusername"
+        def email = "testuser@example.com"
+        User user = new User(username: username, email: email)
+        user = userRepository.save(user)
+
+        when:
+        User editedUser = userService.editUser(new User(username: newusername, email: email))
+
+        then:
+        user.username == username
+        editedUser.username == newusername
+    }
+
     def "should create a user"() {
         given:
         def username = "testuser"
