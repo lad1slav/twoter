@@ -6,7 +6,6 @@ import com.example.twoter.model.User
 import com.example.twoter.repository.CommentRepository
 import com.example.twoter.repository.PostRepository
 import com.example.twoter.repository.UserRepository
-import org.springframework.cglib.core.Local
 import org.springframework.stereotype.Service
 
 import java.time.LocalDate

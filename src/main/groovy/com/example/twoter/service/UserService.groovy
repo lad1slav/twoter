@@ -1,6 +1,5 @@
 package com.example.twoter.service
 
-import com.example.twoter.model.Post
 import com.example.twoter.model.User
 import com.example.twoter.repository.UserRepository
 import org.springframework.stereotype.Service

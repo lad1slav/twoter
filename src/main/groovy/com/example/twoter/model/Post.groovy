@@ -1,6 +1,5 @@
 package com.example.twoter.model
 
-import com.example.twoter.repository.CommentRepository
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.DBRef
 import org.springframework.data.mongodb.core.mapping.Document
