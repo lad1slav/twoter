@@ -61,6 +61,11 @@ class PostService {
         return userSubsPosts
     }
 
+    List<Post> getUserPosts(String userId) {
+        User currentUser = userRepository.findById userId get()
+        return currentUser.getPosts()
+    }
+
     Comment createComment(String data, String postId) {
         Comment newComment = new Comment()
         newComment.setData data

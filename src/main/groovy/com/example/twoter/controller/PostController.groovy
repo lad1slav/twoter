@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
+import java.nio.file.Path
+
 @RestController
 @RequestMapping("/post")
 class PostController {
@@ -49,6 +51,11 @@ class PostController {
     @PostMapping("/comment")
     Comment saveComment(@RequestBody CommentDTO data) {
         postService.createComment data.getData(), data.getPostId()
+    }
+
+    @GetMapping("/list/{userId}")
+    List<Post> getUserPosts(@PathVariable String userId) {
+        postService.getUserPosts userId
     }
 
     @PostMapping("/like/{userId}/{postId}")

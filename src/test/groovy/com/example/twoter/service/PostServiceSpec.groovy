@@ -42,6 +42,20 @@ class PostServiceSpec extends Specification {
         !posts.isEmpty()
     }
 
+    def "should return user post list"() {
+        given:
+        def userId = "1"
+        def data = "somedata"
+        postService.saveNewPost(userId, data)
+
+        when:
+        def posts = postService.getUserPosts(userId)
+
+        then:
+        posts != null
+        !posts.isEmpty()
+    }
+
     def "should create a post"() {
         given:
         def userId = "1"
