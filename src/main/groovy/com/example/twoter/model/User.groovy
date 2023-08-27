@@ -15,5 +15,8 @@ class User {
     @DBRef
     List<Post> posts
 
+    @DBRef
+    List<Like> likes
+
     List<String> subscribers
 }

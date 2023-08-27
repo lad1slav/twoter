@@ -2,8 +2,10 @@ package com.example.twoter.controller
 
 import com.example.twoter.model.Comment
 import com.example.twoter.model.CommentDTO
+import com.example.twoter.model.Like
 import com.example.twoter.model.Post
 import com.example.twoter.model.PostDTO
+import com.example.twoter.service.LikeService
 import com.example.twoter.service.PostService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RestController
 class PostController {
     @Autowired
     PostService postService;
+
+    @Autowired
+    LikeService likeService;
 
     @PostMapping("/save")
     Post savePost(@RequestBody PostDTO postDTO) {
@@ -44,6 +49,16 @@ class PostController {
     @PostMapping("/comment")
     Comment saveComment(@RequestBody CommentDTO data) {
         postService.createComment data.getData(), data.getPostId()
+    }
+
+    @PostMapping("/like/{userId}/{postId}")
+    Like saveLike(@PathVariable String userId, @PathVariable String postId) {
+        likeService.like userId, postId
+    }
+
+    @DeleteMapping("/dislike/{likeId}")
+    Like deleteLike(@PathVariable String likeId) {
+        likeService.deleteLike likeId
     }
 
     @GetMapping("/comment/{postId}")

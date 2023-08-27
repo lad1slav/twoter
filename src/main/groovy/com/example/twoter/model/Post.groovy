@@ -16,4 +16,7 @@ class Post {
 
     @DBRef
     List<Comment> comments
+
+    @DBRef
+    List<Like> likes
 }
