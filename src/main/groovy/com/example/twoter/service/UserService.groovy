@@ -36,9 +36,9 @@ class UserService {
     User subscribe(String userId, String targetUserId) {
         User currentUser = userRepository.findById userId get()
         if (currentUser.getSubscribers() === null || currentUser.getSubscribers().isEmpty()) {
-            currentUser.setSubscribers(new ArrayList<String>())
+            currentUser.setSubscribers(new HashSet<String>())
         }
-        List<String> currentUserSubs = currentUser.getSubscribers()
+        Set<String> currentUserSubs = currentUser.getSubscribers()
         currentUserSubs.add targetUserId
         currentUser.setSubscribers currentUserSubs
         userRepository.save currentUser

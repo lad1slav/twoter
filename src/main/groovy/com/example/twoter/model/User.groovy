@@ -18,5 +18,5 @@ class User {
     @DBRef
     List<Like> likes
 
-    List<String> subscribers
+    Set<String> subscribers
 }
