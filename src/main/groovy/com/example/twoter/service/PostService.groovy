@@ -25,13 +25,17 @@ class PostService {
     }
 
     Post saveNewPost(String userId, String data) {
+        User user = userRepository.findById(userId).get();
+        if (!user.isLogged) {
+            throw new IllegalAccessException("User is not logged in")
+        }
+
         Post newPost = new Post()
         newPost.setData(data)
         newPost.setUserId(userId)
         newPost.setDate(LocalDate.now())
         postRepository.save(newPost)
 
-        User user = userRepository.findById(userId).get();
         if (user.getPosts() === null || user.getPosts().isEmpty()) {
             user.setPosts(new ArrayList<Post>())
         }
@@ -70,13 +74,18 @@ class PostService {
     }
 
     Comment createComment(String data, String postId) {
+        Post commentedPost = postRepository.findById(postId).get()
+        User user = userRepository.findById(commentedPost.userId).get()
+        if (!user.isLogged) {
+            throw new IllegalAccessException("User is not logged in")
+        }
+
         Comment newComment = new Comment()
         newComment.setData data
         newComment.setDate LocalDate.now()
         newComment.setPostId postId
         commentRepository.save newComment
 
-        Post commentedPost = postRepository.findById(postId).get()
         if (commentedPost.getComments() === null || commentedPost.getComments().isEmpty()) {
             commentedPost.setComments(new ArrayList<Comment>())
         }

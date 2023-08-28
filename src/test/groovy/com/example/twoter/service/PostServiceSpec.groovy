@@ -26,6 +26,9 @@ class PostServiceSpec extends Specification {
     @Autowired
     CommentRepository commentRepository
 
+    @Autowired
+    UserRepository userRepository
+
     def "should return newsletter by userId"() {
         given:
         def userId = "1"
@@ -60,6 +63,8 @@ class PostServiceSpec extends Specification {
         given:
         def userId = "1"
         def data = "testuser@example.com"
+        User user = new User(id: userId, isLogged: true)
+        userRepository.save(user)
 
         when:
         Post post = postService.saveNewPost(userId, data)
@@ -104,6 +109,8 @@ class PostServiceSpec extends Specification {
         def data = "testuser@example.com"
         commentRepository.deleteAll()
         Post post = postService.saveNewPost(userId, data)
+        User user = new User(id: userId, isLogged: true)
+        userRepository.save(user)
 
         when:
         postService.createComment(data, post.id)
