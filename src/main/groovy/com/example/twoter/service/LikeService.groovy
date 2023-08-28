@@ -27,18 +27,18 @@ class LikeService {
         likeRepository.save like
         User user = userRepository.findById(userId).get()
         if (user.getLikes() === null || user.getLikes().isEmpty()) {
-            user.setLikes(new ArrayList<Like>())
+            user.setLikes(new HashSet<Like>())
         }
-        List<Like> newLikeList = user.getLikes()
+        Set<Like> newLikeList = user.getLikes()
         newLikeList.add(like)
         user.setLikes(newLikeList)
         userRepository.save(user)
 
         Post post = postRepository.findById(postId).get()
         if(post.getLikes() === null || post.getLikes().isEmpty()) {
-            post.setLikes(new ArrayList<Like>())
+            post.setLikes(new HashSet<Like>())
         }
-        List<Like> newPostLikeList = post.getLikes()
+        Set<Like> newPostLikeList = post.getLikes()
         newPostLikeList.add(like)
         post.setLikes(newPostLikeList)
         postRepository.save(post)

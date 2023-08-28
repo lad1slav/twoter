@@ -18,5 +18,5 @@ class Post {
     List<Comment> comments
 
     @DBRef
-    List<Like> likes
+    Set<Like> likes
 }
