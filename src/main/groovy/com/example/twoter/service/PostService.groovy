@@ -55,6 +55,9 @@ class PostService {
 
     List<Post> getNewsletter(String userId) {
         User currentUser = userRepository.findById userId get()
+        if (!currentUser.isLogged) {
+            throw new IllegalAccessException("User is not logged in")
+        }
         List<Post> userSubsPosts = new ArrayList<>()
         currentUser.getSubscribers().forEach { userSubsPosts.addAll userRepository.findById(it).get().getPosts()}
         userSubsPosts.remove null
