@@ -33,6 +33,21 @@ class UserService {
         userRepository.findById(id).get()
     }
 
+    User login(String username, String password) throws IllegalAccessError{
+        User user = userRepository.getByUsernameAndPassword(username, password)
+        if (user === null) {
+            throw new IllegalAccessError("Incorrect username or password")
+        }
+        user.setIsLogged(true)
+        userRepository.save user
+    }
+
+    User logout(String userId) {
+        User user = userRepository.findById(userId).get()
+        user.setIsLogged(false)
+        userRepository.save(user)
+    }
+
     User subscribe(String userId, String targetUserId) {
         User currentUser = userRepository.findById userId get()
         if (currentUser.getSubscribers() === null || currentUser.getSubscribers().isEmpty()) {

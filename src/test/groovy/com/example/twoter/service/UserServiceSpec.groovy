@@ -31,6 +31,53 @@ class UserServiceSpec extends Specification {
         user.id == id
     }
 
+    def "should login user"() {
+        given:
+        def id = "1"
+        def username = "testname"
+        def password = "testpassword"
+        User savedUser = new User(id: id, username: username, password: password, isLogged: false)
+        userRepository.save(savedUser)
+
+        when:
+        def user = userService.login(username, password)
+
+        then:
+        user != null
+        user.isLogged
+    }
+
+    def "shouldn't login user"() {
+        given:
+        def id = "1"
+        def username = "testname"
+        def password = "testpassword"
+        User savedUser = new User(id: id, username: username, password: password, isLogged: false)
+        userRepository.save(savedUser)
+
+        when:
+        def user = userService.login(username, "errorpassword")
+
+        then:
+        thrown(IllegalAccessError)
+    }
+
+    def "should logout user"() {
+        given:
+        def id = "1"
+        def username = "testname"
+        def password = "testpassword"
+        User savedUser = new User(id: id, username: username, password: password, isLogged: true)
+        userRepository.save(savedUser)
+
+        when:
+        def user = userService.logout(savedUser.id)
+
+        then:
+        user != null
+        !user.isLogged
+    }
+
     def "should delete a user"() {
         given:
         def username = "testuser"

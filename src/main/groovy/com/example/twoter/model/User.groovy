@@ -11,6 +11,7 @@ class User {
     String username
     String email
     String password
+    boolean isLogged
 
     @DBRef
     List<Post> posts

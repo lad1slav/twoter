@@ -38,6 +38,20 @@ class UserController {
         userService.editUser user
     }
 
+    @PostMapping("/login")
+    User login(@RequestBody User user) {
+        try {
+            userService.login(user.username, user.password)
+        } catch (IllegalAccessError e) {
+            throw e
+        }
+    }
+
+    @PostMapping("/logout/{userId}")
+    User logout(@PathVariable userId) {
+        userService.logout(userId)
+    }
+
     @DeleteMapping("/delete/{userId}")
     User deleteUser(@PathVariable String userId) {
         userService.deleteUser userId
